@@ -64,7 +64,7 @@ export default {
     getPicture() {
       this.listLoading = true
       getPicture({
-        type: 'LOGO'
+        type: 'LOGO',
       }).then(response => {
         this.listLoading = false
         this.list = response.data

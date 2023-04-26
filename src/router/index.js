@@ -83,6 +83,13 @@ export const constantRoutes = [
         name: 'BusinessField',
         component: () => import('@/views/businessField/index'),
         meta: { title: '业务领域', icon: 'form' }
+      },
+      {
+        path: '/businessField/add',
+        name: 'BusinessFieldAdd',
+        component: () => import('@/views/businessField/detail'),
+        meta: { title: '业务领域-编辑', icon: 'form' },
+        hidden: true,
       }
     ]
   },

@@ -35,3 +35,39 @@ export function getPictureDetail(params) {
     params
   })
 }
+export function getArticle(params) {
+  return request({
+    url: '/article/public/searchByType',
+    method: 'get',
+    params
+  })
+}
+
+export function postArticle(data) {
+  return request({
+    url: '/article',
+    method: 'post',
+    data
+  })
+}
+export function putArticle(data) {
+  return request({
+    url: '/article',
+    method: 'put',
+    data
+  })
+}
+export function getArticleDetail(params) {
+  return request({
+    url: '/article/' + params.id,
+    method: 'get',
+    params
+  })
+}
+export function delArticle(params) {
+  return request({
+    url: '/article/' + params.id,
+    method: 'delete',
+    params
+  })
+}

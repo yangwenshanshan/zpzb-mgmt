@@ -30,7 +30,7 @@ export default {
     },
     limit: {
       type: Number,
-      default: 20
+      default: 5
     },
     pageSizes: {
       type: Array,
@@ -40,7 +40,7 @@ export default {
     },
     layout: {
       type: String,
-      default: 'total, sizes, prev, pager, next, jumper'
+      default: 'total, prev, pager, next'
     },
     background: {
       type: Boolean,
