@@ -31,7 +31,7 @@ module.exports = {
   productionSourceMap: false,
   devServer: {
     port: port,
-    open: true,
+    open: false,
     proxy: {
       '/api': {
         target: 'https://b.crazystar.net:7101',

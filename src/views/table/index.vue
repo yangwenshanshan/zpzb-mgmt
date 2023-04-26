@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import { getList } from '@/api/table'
+import { getList } from '@/api'
 import Pagination from '@/components/Pagination/index.vue' // secondary package based on el-pagination
 
 export default {

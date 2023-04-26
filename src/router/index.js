@@ -52,6 +52,12 @@ export const constantRoutes = [
       name: 'Dashboard',
       component: () => import('@/views/lunbo/index'),
       meta: { title: '轮播图', icon: 'dashboard' }
+    }, {
+      path: '/dashboard/add',
+      name: 'DashboardAdd',
+      component: () => import('@/views/lunbo/detail'),
+      hidden: true,
+      meta: { title: '轮播图-编辑', icon: 'dashboard' }
     }]
   },
 
@@ -104,7 +110,7 @@ export const constantRoutes = [
         path: 'industryStudyResearch',
         name: 'IndustryStudyResearch',
         component: () => import('@/views/industryStudyResearch/index'),
-        meta: { title: '行业观研',icon: 'nested' }
+        meta: { title: '行业观研',icon: 'nested' },
       },
     ]
   },
@@ -118,6 +124,13 @@ export const constantRoutes = [
         name: 'JsonUs',
         component: () => import('@/views/jsonUs/index'),
         meta: { title: '加入我们图片', icon: 'tree' }
+      },
+      {
+        path: '/jsonUs/add',
+        name: 'JsonUsAdd',
+        component: () => import('@/views/jsonUs/detail'),
+        meta: { title: '加入我们图片-编辑', icon: 'tree' },
+        hidden: true,
       }
     ]
   },
@@ -131,6 +144,13 @@ export const constantRoutes = [
         name: 'Logo',
         component: () => import('@/views/logo/index'),
         meta: { title: 'logo', icon: 'el-icon-s-ticket' }
+      },
+      {
+        path: '/logo/add',
+        name: 'LogoAdd',
+        component: () => import('@/views/logo/detail'),
+        meta: { title: 'logo-编辑', icon: 'el-icon-s-ticket' },
+        hidden: true,
       }
     ]
   },
