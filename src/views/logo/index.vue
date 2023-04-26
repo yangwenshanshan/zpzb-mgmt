@@ -25,6 +25,7 @@
           <el-button  size="mini" type="primary" @click="goAdd(row)">
             编辑
           </el-button>
+          <el-button type="danger" size="mini" @click="delRow(row)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -32,7 +33,7 @@
 </template>
 
 <script>
-import { getPicture } from '@/api'
+import { getPicture, delPicture } from '@/api'
 
 export default {
   name: 'ComplexTable',
@@ -48,6 +49,24 @@ export default {
     this.getPicture()
   },
   methods: {
+    delRow (row) {
+      this.$confirm('是否确认删除', '提示', {
+        type: 'warning'
+      }).then(() => {
+        this.listLoading = true
+        delPicture({
+          id: row.id
+        }).then(res => {
+          this.listLoading = false
+          if (res.code === 'SUCCESS') {
+            this.$message.success('删除成功')
+            this.getPicture()
+          }
+        }).catch(() => {
+          this.listLoading = false
+        })
+      })
+    },
     goAdd (row) {
       this.$router.push({
         path: '/logo/add',

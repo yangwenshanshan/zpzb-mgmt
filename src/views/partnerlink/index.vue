@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    <div class="filter-container">
+    <div class="filter-container" v-if="canAdd">
       <el-button size="small" class="filter-item" type="primary" icon="el-icon-edit" @click="handleCreate">新增</el-button>
     </div>
     <el-table
@@ -12,15 +12,10 @@
       style="width: 100%;"
     >
       <el-table-column align="center" label="ID" prop="id"></el-table-column>
-      <el-table-column align="center" label="图片">
-        <template slot-scope="scope">
-          <el-image class="lubbo-img" :src="scope.row.url" :preview-src-list="[scope.row.url]"></el-image>
-        </template>
-      </el-table-column>
       <el-table-column align="center" label="名称" prop="name"></el-table-column>
       <el-table-column align="center" label="创建时间" prop="createTime"></el-table-column>
       <el-table-column align="center" label="更新时间" prop="updateTime"></el-table-column>
-      <el-table-column label="Actions" align="center" class-name="small-padding fixed-width">
+      <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="{row,$index}">
           <el-button  size="mini" type="primary" @click="goAdd(row)">
             编辑
@@ -33,19 +28,20 @@
 </template>
 
 <script>
-import { getPicture, delPicture } from '@/api'
+import { getPartnerlink, delPartnerlink } from '@/api'
 
 export default {
   name: 'ComplexTable',
   data() {
     return {
+      canAdd: false,
       tableKey: 0,
       list: [],
       listLoading: true,
     }
   },
   created() {
-    this.getPicture()
+    this.getPartnerlink()
   },
   methods: {
     delRow (row) {
@@ -53,13 +49,13 @@ export default {
         type: 'warning'
       }).then(() => {
         this.listLoading = true
-        delPicture({
+        delPartnerlink({
           id: row.id
         }).then(res => {
           this.listLoading = false
           if (res.code === 'SUCCESS') {
             this.$message.success('删除成功')
-            this.getPicture()
+            this.getPartnerlink()
           }
         }).catch(() => {
           this.listLoading = false
@@ -68,7 +64,7 @@ export default {
     },
     goAdd (row) {
       this.$router.push({
-        path: '/jsonUs/add',
+        path: '/partnerlink/add',
         query: {
           id: row.id
         }
@@ -76,16 +72,17 @@ export default {
     },
     handleCreate () {
       this.$router.push({
-        path: '/jsonUs/add'
+        path: '/partnerlink/add'
       })
     },
-    getPicture() {
+    getPartnerlink() {
       this.listLoading = true
-      getPicture({
-        type: 'BRAND'
-      }).then(response => {
+      getPartnerlink().then(response => {
         this.listLoading = false
         this.list = response.data
+        if (this.list.length < 2) {
+          this.canAdd = true
+        }
       })
     },
   }

@@ -54,8 +54,9 @@ export default {
         this.loading = false
         if (res.code === 'SUCCESS') {
           if (res.data && res.data.content && res.data.content.length) {
-            this.id = res.data.content[0].id
-            this.detail = res.data.content[0]
+            const content = res.data.content
+            this.id = content[content.length - 1].id
+            this.detail = content[content.length - 1]
           }
         }
       }).catch(() => {
