@@ -183,6 +183,26 @@ export const constantRoutes = [
     ]
   },
 
+  {
+    path: '/partnerlink',
+    component: Layout,
+    children: [
+      {
+        path: '/partnerlink',
+        name: 'PartnerLink',
+        component: () => import('@/views/partnerlink/index'),
+        meta: { title: '伙伴登录', icon: 'table' }
+      },
+      {
+        path: '/partnerlink/add',
+        name: 'PartnerlinkAdd',
+        component: () => import('@/views/partnerlink/detail'),
+        meta: { title: '伙伴登录-编辑', icon: 'table' },
+        hidden: true,
+      }
+    ]
+  },
+
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
 ]

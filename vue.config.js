@@ -34,7 +34,7 @@ module.exports = {
     open: false,
     proxy: {
       '/api': {
-        target: 'https://b.crazystar.net:7101',
+        target: 'https://b.crazystar.net:7101/api',
         changeOrigin: true, //在这里设置是否跨域
         pathRewrite: {
           '^/api': ''
