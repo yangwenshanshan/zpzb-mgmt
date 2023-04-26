@@ -2,6 +2,7 @@
   <el-upload
     class="avatar-uploader"
     :action="api + '/picture/upload'"
+    accept="image/*"
     :headers="headers"
     :show-file-list="false"
     :before-upload="beforeAvatarUpload"

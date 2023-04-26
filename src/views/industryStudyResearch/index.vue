@@ -63,7 +63,7 @@ export default {
     },
     goAdd (row) {
       this.$router.push({
-        path: '/businessField/add',
+        path: '/consultationExpress/industryStudyResearch/add',
         query: {
           id: row.id
         }
@@ -71,14 +71,14 @@ export default {
     },
     handleCreate () {
       this.$router.push({
-        path: '/businessField/add'
+        path: '/consultationExpress/industryStudyResearch/add'
       })
     },
     getArticle() {
       this.listLoading = true
       getArticle({
         ...this.listQuery,
-        type: 'BUSINESS_AREA'
+        type: 'NEWS_INDUSTRY'
       }).then(response => {
         if (response.code === 'SUCCESS') {
           this.list = response.data.content

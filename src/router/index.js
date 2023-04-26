@@ -108,16 +108,37 @@ export const constantRoutes = [
         meta: { title: '企业快报', icon: 'table' }
       },
       {
+        path: 'corporateExpress/add',
+        name: 'CorporateExpressAdd',
+        component: () => import('@/views/corporateExpress/detail'),
+        meta: { title: '企业快报-编辑', icon: 'table' },
+        hidden: true,
+      },
+      {
         path: 'ruleInterpretation',
         name: 'RuleInterpretation',
         component: () => import('@/views/ruleInterpretation/index'),
         meta: { title: '规则解读', icon: 'tree' }
       },
       {
+        path: 'ruleInterpretation/add',
+        name: 'RuleInterpretationAdd',
+        component: () => import('@/views/ruleInterpretation/detail'),
+        meta: { title: '规则解读-编辑', icon: 'tree' },
+        hidden: true,
+      },
+      {
         path: 'industryStudyResearch',
         name: 'IndustryStudyResearch',
         component: () => import('@/views/industryStudyResearch/index'),
         meta: { title: '行业观研',icon: 'nested' },
+      },
+      {
+        path: 'industryStudyResearch/add',
+        name: 'IndustryStudyResearchAdd',
+        component: () => import('@/views/industryStudyResearch/detail'),
+        meta: { title: '行业观研-编辑', icon: 'nested' },
+        hidden: true,
       },
     ]
   },
