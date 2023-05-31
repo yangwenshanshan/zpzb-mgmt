@@ -1,45 +1,52 @@
 <template>
   <div class="app-container">
-    <div class="filter-container">
+    <div class="filter-container" v-if="canAdd">
       <el-button size="small" class="filter-item" type="primary" icon="el-icon-edit" @click="handleCreate">新增</el-button>
     </div>
-    <el-table :key="tableKey" v-loading="listLoading" :data="list" border highlight-current-row style="width: 100%;">
+    <el-table
+      :key="tableKey"
+      v-loading="listLoading"
+      :data="list"
+      border
+      highlight-current-row
+      style="width: 100%;"
+    >
       <el-table-column align="center" label="ID" prop="id"></el-table-column>
-      <el-table-column align="center" label="标题" prop="title"></el-table-column>
+      <el-table-column align="center" label="图片">
+        <template slot-scope="scope">
+          <el-image class="lubbo-img" :src="scope.row.url" :preview-src-list="[scope.row.url]"></el-image>
+        </template>
+      </el-table-column>
+      <el-table-column align="center" label="名称" prop="name"></el-table-column>
       <el-table-column align="center" label="创建时间" prop="createTime"></el-table-column>
       <el-table-column align="center" label="更新时间" prop="updateTime"></el-table-column>
-      <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
+      <el-table-column label="Actions" align="center" class-name="small-padding fixed-width">
         <template slot-scope="{row,$index}">
-          <el-button type="primary" size="mini" @click="goAdd(row)">查看</el-button>
+          <el-button  size="mini" type="primary" @click="goAdd(row)">
+            编辑
+          </el-button>
           <el-button type="danger" size="mini" @click="delRow(row)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
-    <pagination v-show="total>0" :total="total" :page.sync="listQuery.current" :limit="listQuery.size" @pagination="getArticle" />
   </div>
 </template>
 
 <script>
-import { getArticle, delArticle } from '@/api'
-import Pagination from '@/components/Pagination/index.vue' // secondary package based on el-pagination
+import { getPicture, delPicture } from '@/api'
 
 export default {
   name: 'ComplexTable',
-  components: { Pagination },
   data() {
     return {
       tableKey: 0,
-      total: 0,
       list: [],
       listLoading: true,
-      listQuery: {
-        current: 1,
-        size: 10,
-      },
+      canAdd: false,
     }
   },
   created() {
-    this.getArticle()
+    this.getPicture()
   },
   methods: {
     delRow (row) {
@@ -47,13 +54,13 @@ export default {
         type: 'warning'
       }).then(() => {
         this.listLoading = true
-        delArticle({
+        delPicture({
           id: row.id
         }).then(res => {
           this.listLoading = false
           if (res.code === 'SUCCESS') {
             this.$message.success('删除成功')
-            this.getArticle()
+            this.getPicture()
           }
         }).catch(() => {
           this.listLoading = false
@@ -62,7 +69,7 @@ export default {
     },
     goAdd (row) {
       this.$router.push({
-        path: '/businessField/add',
+        path: '/map/add',
         query: {
           id: row.id
         }
@@ -70,19 +77,18 @@ export default {
     },
     handleCreate () {
       this.$router.push({
-        path: '/businessField/add'
+        path: '/map/add'
       })
     },
-    getArticle() {
+    getPicture() {
       this.listLoading = true
-      getArticle({
-        ...this.listQuery,
-        type: 'BUSINESS_AREA',
+      getPicture({
+        type: 'PROVINCE_MAP',
       }).then(response => {
-        if (response.code === 'SUCCESS') {
-          this.list = response.data.content
-          this.total = response.data.total
-          this.listLoading = false
+        this.listLoading = false
+        this.list = response.data
+        if (this.list.length < 1) {
+          this.canAdd = true
         }
       })
     },
@@ -95,5 +101,11 @@ export default {
   display: flex;
   justify-content: flex-start;
   margin-bottom: 10px;
+}
+.lubbo-img{
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  cursor: pointer;
 }
 </style>

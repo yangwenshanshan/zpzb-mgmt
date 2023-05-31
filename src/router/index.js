@@ -203,6 +203,26 @@ export const constantRoutes = [
     ]
   },
 
+  {
+    path: '/map',
+    component: Layout,
+    children: [
+      {
+        path: '/map',
+        name: 'Map',
+        component: () => import('@/views/map/index'),
+        meta: { title: '地图', icon: 'form' }
+      },
+      {
+        path: '/map/add',
+        name: 'mapAdd',
+        component: () => import('@/views/map/detail'),
+        meta: { title: '地图-编辑', icon: 'form' },
+        hidden: true,
+      }
+    ]
+  },
+
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
 ]

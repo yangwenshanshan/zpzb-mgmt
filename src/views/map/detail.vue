@@ -4,12 +4,6 @@
       <el-form-item label="图片">
         <preview-upload-image :url="params.url" @change="imageChange" @success="imageSuccess"></preview-upload-image>
       </el-form-item>
-      <el-form-item label="图片名称">
-        <el-input v-model="params.name"></el-input>
-      </el-form-item>
-      <el-form-item label="跳转链接">
-        <el-input v-model="params.href"></el-input>
-      </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="onSubmit">{{ id ? '立即修改' : '立即创建' }}</el-button>
         <el-button @click="$router.go(-1)">取消</el-button>
@@ -28,7 +22,7 @@ export default {
         name: '',
         url: '',
         href: '',
-        type: 'LOGO'
+        type: 'PROVINCE_MAP'
       },
       file: null,
       id: 0,
@@ -45,7 +39,7 @@ export default {
             name: res.data.name,
             url: res.data.url,
             href: res.data.href,
-            type: 'LOGO'
+            type: 'PROVINCE_MAP'
           }
         }
       })

@@ -24,7 +24,7 @@ module.exports = {
    * In most cases please use '/' !!!
    * Detail: https://cli.vuejs.org/config/#publicpath
    */
-  publicPath: '/',
+  publicPath: '/admin',
   outputDir: 'dist',
   assetsDir: 'static',
   lintOnSave: process.env.NODE_ENV === 'development',
@@ -34,7 +34,7 @@ module.exports = {
     open: false,
     proxy: {
       '/api': {
-        target: 'https://b.crazystar.net:7101/api',
+        target: 'https://zpzb.online/api',
         changeOrigin: true, //在这里设置是否跨域
         pathRewrite: {
           '^/api': ''
